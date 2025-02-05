@@ -1,7 +1,7 @@
 export default function Header() {
 	return (
 		<header>
-			<h3 className="page-title">Ceci ne pas un todo list.</h3>
+			<p className="page-title">TODO list</p>
 		</header>
 	);
 }

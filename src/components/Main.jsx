@@ -5,13 +5,13 @@ export default function Main() {
 
 	const todoListItems = todoList.map((item) => {
 		return (
-			<li key={item}>
-				<input type="checkbox" id={item} />
-				<label className="todo-item" htmlFor={item}>
+			<li key={item} className="list-item">
+				<input type="checkbox" id={item} className="checkbox" />
+				<label htmlFor={item}>
 					{item}
 				</label>
-				<button onClick={editTask}>Edit</button>
-				<button onClick={deleteTask}>Delete</button>
+				<button onClick={editTask} className="edit-button">Edit</button>
+				<button onClick={deleteTask} className="delete-button">Delete</button>
 			</li>
 		);
 	});
@@ -33,12 +33,12 @@ export default function Main() {
 		<main>
 			<form action={addTodo} className="add-todo-form">
 				<input type="text" placeholder="e.g. sleeping" name="todo" />
-				<button>Add Todo</button>
+				<button className={"add-button"}>Add Todo</button>
 			</form>
 
 			<section className={"todo-list"}>
-				<h3>Your Todos</h3>
-				<ul>{todoListItems}</ul>
+				<p className="list-title">Your TODOs</p>
+				<ul className="list">{todoListItems}</ul>
 			</section>
 		</main>
 	);
