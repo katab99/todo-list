@@ -1,33 +1,37 @@
 import { useState } from "react";
+import { nanoid } from "nanoid"
 
 export default function Main() {
-	const [todoList, setTodoList] = useState(["sleep", "eat"]);
+	const [todoList, setTodoList] = useState([
+		{id : nanoid(), task : "sleep"},
+		{id: nanoid(), task : "eat"},]);
 
 	const todoListItems = todoList.map((item) => {
 		return (
-			<li key={item} className="list-item">
-				<input type="checkbox" id={item} className="checkbox" />
-				<label htmlFor={item}>
-					{item}
+			<li key={item.id} className="list-item">
+				<input type="checkbox" id={item.id} className="checkbox" />
+				<label htmlFor={item.id}>
+					{item.task}
 				</label>
 				<button onClick={editTask} className="edit-button">Edit</button>
-				<button onClick={deleteTask} className="delete-button">Delete</button>
+				<button onClick={() => deleteTask(item.id)} className="delete-button">Delete</button>
 			</li>
 		);
 	});
 
 	function addTodo(formData) {
 		const newTodo = formData.get("todo");
-		setTodoList((prevList) => [...prevList, newTodo]);
+		setTodoList((prevList) => [...prevList, {id: nanoid(), task : newTodo}]);
 	}
 
 	function editTask() {
 		console.log("U clicked ME!!");
 	}
 
-	function deleteTask() {
-		console.log("delete this ...");
-	}
+	function deleteTask(id) {
+		setTodoList(prevList =>
+			prevList.filter((item) => item.id !== id)
+	)}
 
 	return (
 		<main>
