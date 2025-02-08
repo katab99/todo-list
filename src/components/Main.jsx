@@ -3,13 +3,13 @@ import { nanoid } from "nanoid"
 
 export default function Main() {
 	const [todoList, setTodoList] = useState([
-		{id : nanoid(), task : "sleep"},
-		{id: nanoid(), task : "eat"},]);
+		{id : nanoid(), task : "sleep", isCompleted: false },
+		{id: nanoid(), task : "eat", isCompleted: false },]);
 
 	const todoListItems = todoList.map((item) => {
 		return (
 			<li key={item.id} className="list-item">
-				<input type="checkbox" id={item.id} className="checkbox" />
+				<input type="checkbox" id={item.id} className="checkbox" checked={item.isCompleted} onChange={() => toggleCheck(item.id)} />
 				<label htmlFor={item.id}>
 					{item.task}
 				</label>
@@ -21,7 +21,7 @@ export default function Main() {
 
 	function addTodo(formData) {
 		const newTodo = formData.get("todo");
-		setTodoList((prevList) => [...prevList, {id: nanoid(), task : newTodo}]);
+		setTodoList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false}]);
 	}
 
 	function editTask() {
@@ -29,9 +29,13 @@ export default function Main() {
 	}
 
 	function deleteTask(id) {
-		setTodoList(prevList =>
-			prevList.filter((item) => item.id !== id)
+		setTodoList(prevList => prevList.filter((item) => item.id !== id)
 	)}
+
+	function toggleCheck(id) {
+		setTodoList(prevList =>
+			(prevList.map((item) => item.id === id ? {...item, isCompleted: !item.isCompleted} : item)))
+	}
 
 	return (
 		<main>
