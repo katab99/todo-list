@@ -1,27 +1,31 @@
 import { useState } from "react";
 import { nanoid } from "nanoid"
+import Task from "./Task.jsx";
 
 export default function Main() {
-	const [todoList, setTodoList] = useState([
+	const [taskList, setTaskList] = useState([
 		{id : nanoid(), task : "sleep", isCompleted: false },
 		{id: nanoid(), task : "eat", isCompleted: false },]);
 
-	const todoListItems = todoList.map((item) => {
-		return (
-			<li key={item.id} className="list-item">
-				<input type="checkbox" id={item.id} className="checkbox" checked={item.isCompleted} onChange={() => toggleCheck(item.id)} />
-				<label htmlFor={item.id}>
-					{item.task}
-				</label>
-				<button onClick={editTask} className="edit-button">Edit</button>
-				<button onClick={() => deleteTask(item.id)} className="delete-button">Delete</button>
-			</li>
-		);
-	});
+	function divideTaskList(isCompletedList) {
+		return taskList
+			.filter((item) => item.isCompleted === isCompletedList)
+			.map((item) => {
+				return(<Task key={item.id}
+							 item={item}
+							 toggleCheck={() => toggleCheck(item.id)}
+							 editTask = {editTask}
+							 deleteTask = {() => deleteTask(item.id)}
+							  />)
+			})
+	}
+
+	const todoListItems = divideTaskList(false)
+	const completedListItems = divideTaskList(true)
 
 	function addTodo(formData) {
 		const newTodo = formData.get("todo");
-		setTodoList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false}]);
+		setTaskList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false}]);
 	}
 
 	function editTask() {
@@ -29,11 +33,11 @@ export default function Main() {
 	}
 
 	function deleteTask(id) {
-		setTodoList(prevList => prevList.filter((item) => item.id !== id)
+		setTaskList(prevList => prevList.filter((item) => item.id !== id)
 	)}
 
 	function toggleCheck(id) {
-		setTodoList(prevList =>
+		setTaskList(prevList =>
 			(prevList.map((item) => item.id === id ? {...item, isCompleted: !item.isCompleted} : item)))
 	}
 
@@ -44,10 +48,15 @@ export default function Main() {
 				<button className={"add-button"}>Add Todo</button>
 			</form>
 
-			<section className={"todo-list"}>
+			{todoListItems.length > 0 ? <section className="todo-list">
 				<p className="list-title">Your TODOs</p>
 				<ul className="list">{todoListItems}</ul>
-			</section>
+			</section> : null}
+
+			{ completedListItems.length > 0? <section className="todo-list">
+				<p className="list-title">Completed Tasks</p>
+				<ul className="list">{completedListItems}</ul>
+			</section>: null}
 		</main>
 	);
 }
