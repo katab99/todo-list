@@ -51,7 +51,7 @@ export default function Main() {
 		<main>
 			<form action={addTodo} className="add-todo-form">
 				<input className="add-todo-text" type="text" placeholder="e.g. sleeping" name="todo" />
-				<button className="add-todo-button">Add Todo</button>
+				<button className="add-todo-button">Add</button>
 			</form>
 
 			{todoListItems.length > 0 ? <section className="todo-list">
