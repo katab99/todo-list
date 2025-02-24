@@ -4,8 +4,8 @@ import Task from "./Task.jsx";
 
 export default function Main() {
 	const [taskList, setTaskList] = useState([
-		{id : nanoid(), task : "sleep", isCompleted: false },
-		{id: nanoid(), task : "eat", isCompleted: false },]);
+		{id : nanoid(), task : "sleep", isCompleted: false, isEditing: false },
+		{id: nanoid(), task : "eat", isCompleted: false, isEditing: false },]);
 
 	function divideTaskList(isCompletedList) {
 		return taskList
@@ -14,8 +14,9 @@ export default function Main() {
 				return(<Task key={item.id}
 							 item={item}
 							 toggleCheck={() => toggleCheck(item.id)}
-							 editTask = {editTask}
+							 toggleEdit = {() => toggleEdit(item.id)}
 							 deleteTask = {() => deleteTask(item.id)}
+							 updateTask = {updateTaskList}
 							  />)
 			})
 	}
@@ -25,11 +26,16 @@ export default function Main() {
 
 	function addTodo(formData) {
 		const newTodo = formData.get("todo");
-		setTaskList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false}]);
+		setTaskList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false, isEditing : false}]);
 	}
 
-	function editTask() {
-		console.log("U clicked ME!!");
+	function toggleEdit(id) {
+		setTaskList(prevList =>
+			(prevList.map((item) => item.id === id ? {...item, isEditing: !item.isEditing} : item)))
+	}
+
+	function updateTaskList(updatedTask) {
+		setTaskList((prevList) => prevList.map((task) => task.id === updatedTask.id ? updatedTask : task));
 	}
 
 	function deleteTask(id) {
@@ -44,8 +50,8 @@ export default function Main() {
 	return (
 		<main>
 			<form action={addTodo} className="add-todo-form">
-				<input type="text" placeholder="e.g. sleeping" name="todo" />
-				<button className={"add-button"}>Add Todo</button>
+				<input className="add-todo-text" type="text" placeholder="e.g. sleeping" name="todo" />
+				<button className="add-todo-button">Add Todo</button>
 			</form>
 
 			{todoListItems.length > 0 ? <section className="todo-list">
