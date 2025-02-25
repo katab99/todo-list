@@ -4,8 +4,8 @@ import Task from "./Task.jsx";
 
 export default function Main() {
 	const [taskList, setTaskList] = useState([
-		{id : nanoid(), task : "sleep", isCompleted: false, isEditing: false },
-		{id: nanoid(), task : "eat", isCompleted: false, isEditing: false },]);
+		{id : nanoid(), task : "sleep", isCompleted: false},
+		{id: nanoid(), task : "eat", isCompleted: false},]);
 
 	function divideTaskList(isCompletedList) {
 		return taskList
@@ -14,7 +14,6 @@ export default function Main() {
 				return(<Task key={item.id}
 							 item={item}
 							 toggleCheck={() => toggleCheck(item.id)}
-							 toggleEdit = {() => toggleEdit(item.id)}
 							 deleteTask = {() => deleteTask(item.id)}
 							 updateTask = {updateTaskList}
 							  />)
@@ -26,16 +25,14 @@ export default function Main() {
 
 	function addTodo(formData) {
 		const newTodo = formData.get("todo");
-		setTaskList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false, isEditing : false}]);
-	}
-
-	function toggleEdit(id) {
-		setTaskList(prevList =>
-			(prevList.map((item) => item.id === id ? {...item, isEditing: !item.isEditing} : item)))
+		setTaskList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false}]);
 	}
 
 	function updateTaskList(updatedTask) {
-		setTaskList((prevList) => prevList.map((task) => task.id === updatedTask.id ? updatedTask : task));
+		console.log(updatedTask);
+		setTaskList((prevList) =>
+			prevList.map((task) => task.id === updatedTask.id ? updatedTask : task));
+		console.log(taskList);
 	}
 
 	function deleteTask(id) {

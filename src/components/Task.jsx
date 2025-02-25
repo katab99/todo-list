@@ -1,26 +1,42 @@
 /* eslint-disable */
-export default function Task(props){
+import {useState} from "react";
 
-    function handleSubmit(formData){
+export default function Task(props){
+    const [isEditing, setIsEditing] = useState(false);
+
+    function submitEdit(formData){
         const taskUpdate = formData.get("updated-task");
-        console.log(taskUpdate)
-        props.updateTask(taskUpdate);
+        props.updateTask(
+            {...props.item, task : taskUpdate},
+        );
+
+        toggleEdit()
+    }
+
+    function toggleEdit(){
+        setIsEditing(prevInEdit => !prevInEdit);
     }
 
     return(
         <li key={props.item.id} className="list-item">
-            <input type="checkbox" id={props.item.id} className="checkbox" checked={props.item.isCompleted} onChange={props.toggleCheck} />
             <label htmlFor={props.item.id}>
-                {props.item.isEditing ?
-                <form action={handleSubmit}>
-                    <input type="text" defaultValue={props.item.task} name="updated-task"/>
-                    <button>Save</button>
-                </form>
-                : props.item.task }
+                {isEditing ?
+                    <>
+                        <form id="edit-task" action={submitEdit}>
+                            <input type="text" defaultValue={props.item.task} name="updated-task"/>
+                        </form>
+                        <button form="edit-task" type="submit">Save</button>
+                        <button type="button">Cancel</button>
+                    </>
+                :
+                    <>
+                        <span>{props.item.task}</span>
+                        <button onClick={() => props.toggleCheck(props.item.id)}>Complete</button>
+                        <button onClick={toggleEdit} className="edit-button">Edit</button>
+                        <button onClick={props.deleteTask} className="delete-button">Delete</button>
+                    </>
+                     }
             </label>
-                {/*<button onClick={props.toggleEdit} className="edit-button">Cancel</button>*/}
-                <button onClick={props.toggleEdit} className="edit-button">Edit</button>
-                <button onClick={props.deleteTask} className="delete-button">Delete</button>
         </li>
 
     )

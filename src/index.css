@@ -45,23 +45,10 @@ input.add-todo-text{
 
 input.add-todo-text:focus{
     outline: none;
-    border-bottom: 2px solid #3498db; /* Change color and thickness as needed */
+    border-bottom: 2px solid #3498db;
     transition: border-bottom 0.01s;
 }
 
-button.add-todo-button{
-    background: #fff;
-    color: #080705;
-    padding: 10px 20px;
-    border: 1px solid #080705;
-    border-radius: 2px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-button.add-todo-button:hover{
-   cursor: pointer;
-}
 
 .list-title{
     display: flex;
@@ -86,5 +73,19 @@ button.add-todo-button:hover{
 ul{
     list-style-type: none;
     padding: 0;
+}
+
+button{
+    background: #fff;
+    color: #080705;
+    padding: 10px 20px;
+    border: 1px solid #080705;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+button:hover{
+    cursor: pointer;
 }
 
