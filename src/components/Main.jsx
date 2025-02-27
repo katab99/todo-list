@@ -50,7 +50,7 @@ export default function Main() {
 				<input className="add-task-text" type="text"
 					   placeholder="e.g. sleeping" value={newTask}
 					   onChange={(e) => setNewTask(e.target.value)}/>
-				<button type="submit" className="add-task-button" onClick={addTask}> Add</button>
+				<button type="submit" className="add-task-button" onClick={addTask}>Add</button>
 			</section>
 
 			{todoListItems.length > 0 ? <section className="list-container">

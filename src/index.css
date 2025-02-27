@@ -9,7 +9,6 @@ body{
 }
 
 header {
-    width: 100%;
     background: #ccdbdc;
     margin: 0 auto;
     padding: 16px;
@@ -32,12 +31,6 @@ section.add-task-container > * {
     margin: 20px;
 }
 
-input.add-todo-text:focus{
-    outline: none;
-    border-bottom: 2px solid #3498db;
-    transition: border-bottom 0.01s;
-}
-
 section.list-container{
     width: 100%;
     max-width: 800px;
@@ -47,7 +40,6 @@ section.list-container{
 p.list-title{
     display: flex;
     justify-content: center;
-    padding: 10px 0;
     font-weight: 600;
 }
 
@@ -60,8 +52,23 @@ label.task-item{
     margin-bottom: 8px;
 }
 
+label.task-item.editing{
+    display: grid;
+    grid-template-columns: 2fr auto;
+}
+
+input.task-update{
+    margin-left: 60px;
+    font-size: 1rem;
+}
+
+button.task-state{
+    width: 40px;
+    padding: 0;
+}
 
 span.task-name{
+    font-size: 1rem;
     overflow: hidden;
     padding: 0 8px;
 }
@@ -71,11 +78,21 @@ div.action-buttons{
     gap: 8px;
 }
 
+div.action-buttons button{
+    width: 92px;
+}
+
 input{
     width: 350px;
     border: none;
     border-bottom: 1px solid #080705;
     border-radius: 0;
+}
+
+input:focus{
+    outline: none;
+    border-bottom: 2px solid #3498db;
+    transition: border-bottom 0.01s;
 }
 
 ul{
@@ -92,6 +109,7 @@ button{
     border-radius: 2px;
     font-size: 0.9rem;
     font-weight: 600;
+    height: 40px;
 }
 
 button:hover{
