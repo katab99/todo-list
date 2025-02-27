@@ -51,14 +51,14 @@ export default function Main() {
 				<button className="add-todo-button">Add</button>
 			</form>
 
-			{todoListItems.length > 0 ? <section className="todo-list">
+			{todoListItems.length > 0 ? <section className="list-container">
 				<p className="list-title">Your TODOs</p>
-				<ul className="list">{todoListItems}</ul>
+				<ul className="task-list">{todoListItems}</ul>
 			</section> : null}
 
-			{ completedListItems.length > 0? <section className="todo-list">
+			{ completedListItems.length > 0? <section className="list-container">
 				<p className="list-title">Completed Tasks</p>
-				<ul className="list">{completedListItems}</ul>
+				<ul className="task-list">{completedListItems}</ul>
 			</section>: null}
 		</main>
 	);

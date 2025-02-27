@@ -1,5 +1,6 @@
 /* eslint-disable */
 import {useState} from "react";
+import {clsx} from "clsx";
 
 export default function Task(props){
     const [isEditing, setIsEditing] = useState(false);
@@ -17,9 +18,10 @@ export default function Task(props){
         setIsEditing(prevInEdit => !prevInEdit);
     }
 
+
     return(
-        <li key={props.item.id} className="list-item">
-            <label htmlFor={props.item.id}>
+        <li key={props.item.id}>
+            <label htmlFor={props.item.id} className="task-item">{props.item.name}
                 {isEditing ?
                     <>
                         <form id="edit-task" action={submitEdit}>
@@ -30,12 +32,15 @@ export default function Task(props){
                     </>
                 :
                     <>
-                        <span>{props.item.task}</span>
-                        <button onClick={() => props.toggleCheck(props.item.id)}>Complete</button>
-                        <button onClick={toggleEdit} className="edit-button">Edit</button>
-                        <button onClick={props.deleteTask} className="delete-button">Delete</button>
+                        <button className={clsx("complete-button",
+                            {"hidden" : props.item.isCompleted})} onClick={() => props.toggleCheck(props.item.id)}>Complete</button>
+                        <span className="task-name">{props.item.task}</span>
+                        <div className="action-buttons">
+                            <button onClick={toggleEdit} className="edit-button">Edit</button>
+                            <button onClick={props.deleteTask} className="delete-button">Delete</button>
+                        </div>
                     </>
-                     }
+                }
             </label>
         </li>
 
