@@ -24,7 +24,7 @@ export default function Task(props){
                     <>
                         <input type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)} />
                         <button type="submit" onClick={submitUpdate}>Save</button>
-                        <button type="button">Cancel</button>
+                        <button type="button" >Cancel</button>
                     </>
                 :
                     <>

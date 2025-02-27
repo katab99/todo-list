@@ -23,24 +23,13 @@ p.page-title {
     justify-content: center;
 }
 
-
-form.add-todo-form{
+section.add-task-container{
     display: flex;
     justify-content: center;
 }
 
-form.add-todo-form > * {
+section.add-task-container > * {
     margin: 20px;
-    padding: 5px 10px;
-    border: 1px solid #080705;
-    border-radius: 5px;
-}
-
-input.add-todo-text{
-    width: 350px;
-    border: none;
-    border-bottom: 1px solid #080705;
-    border-radius: 0;
 }
 
 input.add-todo-text:focus{

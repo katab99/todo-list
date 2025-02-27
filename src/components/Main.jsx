@@ -3,6 +3,7 @@ import { nanoid } from "nanoid"
 import Task from "./Task.jsx";
 
 export default function Main() {
+	const [newTask, setNewTask] = useState("");
 	const [taskList, setTaskList] = useState([
 		{id : nanoid(), task : "sleep", isCompleted: false},
 		{id: nanoid(), task : "eat", isCompleted: false},]);
@@ -23,16 +24,15 @@ export default function Main() {
 	const todoListItems = divideTaskList(false)
 	const completedListItems = divideTaskList(true)
 
-	function addTodo(formData) {
-		const newTodo = formData.get("todo");
-		setTaskList((prevList) => [...prevList, {id: nanoid(), task : newTodo, isCompleted : false}]);
+	function addTask() {
+		console.log(newTask);
+		setTaskList((prevList) => [...prevList, {id: nanoid(), task : newTask, isCompleted : false}]);
+		setNewTask("");
 	}
 
 	function updateTaskList(updatedTask) {
-		console.log(updatedTask);
 		setTaskList((prevList) =>
 			prevList.map((task) => task.id === updatedTask.id ? updatedTask : task));
-		console.log(taskList);
 	}
 
 	function deleteTask(id) {
@@ -46,10 +46,12 @@ export default function Main() {
 
 	return (
 		<main>
-			<form action={addTodo} className="add-todo-form">
-				<input className="add-todo-text" type="text" placeholder="e.g. sleeping" name="todo" />
-				<button className="add-todo-button">Add</button>
-			</form>
+			<section className="add-task-container">
+				<input className="add-task-text" type="text"
+					   placeholder="e.g. sleeping" value={newTask}
+					   onChange={(e) => setNewTask(e.target.value)}/>
+				<button type="submit" className="add-task-button" onClick={addTask}> Add</button>
+			</section>
 
 			{todoListItems.length > 0 ? <section className="list-container">
 				<p className="list-title">Your TODOs</p>
