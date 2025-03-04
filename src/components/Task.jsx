@@ -18,13 +18,26 @@ export default function Task(props){
         setIsEditing(prevInEdit => !prevInEdit);
     }
 
+    function updateKeyDown(e){
+        if (e.key === 'Enter') {
+            submitUpdate();
+        }
+        if (e.key === 'Escape') {
+            toggleEdit();
+        }
+    }
+
     return(
         <li key={props.item.id}>
             <label htmlFor={props.item.id}
                    className={clsx("task-item", {"editing" : isEditing})}>
                 {isEditing ?
                     <>
-                        <input className="task-update" type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)} />
+                        <input className="task-update"
+                               type="text"
+                               value={taskText}
+                               onChange={(e) => setTaskText(e.target.value)}
+                               onKeyDown={updateKeyDown}/>
                         <div className="action-buttons">
                             <button type="submit" onClick={submitUpdate}>Save</button>
                             <button type="button" onClick={toggleEdit}>Cancel</button>

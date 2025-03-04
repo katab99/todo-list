@@ -4,9 +4,7 @@ import Task from "./Task.jsx";
 
 export default function Main() {
 	const [newTask, setNewTask] = useState("");
-	const [taskList, setTaskList] = useState([
-		{id : nanoid(), task : "sleep", isCompleted: false},
-		{id: nanoid(), task : "eat", isCompleted: false},]);
+	const [taskList, setTaskList] = useState([]);
 
 	function divideTaskList(isCompletedList) {
 		return taskList
@@ -44,12 +42,19 @@ export default function Main() {
 			(prevList.map((item) => item.id === id ? {...item, isCompleted: !item.isCompleted} : item)))
 	}
 
+	function addTaskKeyDown(e){
+		if (e.key === 'Enter') {
+			addTask();
+		}
+	}
+
 	return (
 		<main>
 			<section className="add-task-container">
 				<input className="add-task-text" type="text"
 					   placeholder="e.g. sleeping" value={newTask}
-					   onChange={(e) => setNewTask(e.target.value)}/>
+					   onChange={(e) => setNewTask(e.target.value)}
+					   onKeyDown={addTaskKeyDown}/>
 				<button type="submit" className="add-task-button" onClick={addTask}>Add</button>
 			</section>
 
@@ -58,7 +63,7 @@ export default function Main() {
 				<ul className="task-list">{todoListItems}</ul>
 			</section> : null}
 
-			{ completedListItems.length > 0? <section className="list-container">
+			{completedListItems.length > 0? <section className="list-container">
 				<p className="list-title">Completed Tasks</p>
 				<ul className="task-list">{completedListItems}</ul>
 			</section>: null}
