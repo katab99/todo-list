@@ -32,5 +32,5 @@ docker build -t todo-list .
 ## Running
 
 ```bash
-docker run todo-list -p 8080:80
+docker run -p 8080:80 todo-list
 ```
