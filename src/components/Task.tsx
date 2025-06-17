@@ -1,48 +1,47 @@
-/* eslint-disable */
 import { useState } from "react";
 import { clsx } from "clsx";
-
-type TaskType = {
-	id: string;
-	task: string;
-	isCompleted: boolean;
-};
+import { TaskType } from "./Main";
 
 type TaskProps = {
 	item: TaskType;
-	updateTask: (task: TaskType) => void;
 	toggleCheck: (id: string) => void;
-	deleteTask: () => void;
+	updateTask?: (task: TaskType) => void;
+	deleteTask?: () => void;
 };
 
-export default function Task(props: TaskProps) {
+export default function Task({
+	item,
+	updateTask,
+	toggleCheck,
+	deleteTask,
+}: TaskProps) {
 	const [isEditing, setIsEditing] = useState(false);
-	const [taskText, setTaskText] = useState(
-		props.item.task ? props.item.task : ""
-	);
+	const [taskText, setTaskText] = useState(item.task ? item.task : "");
 
-	function submitUpdate() {
-		props.updateTask({ ...props.item, task: taskText });
+	const submitUpdate = () => {
+		if (typeof updateTask === "function") {
+			updateTask({ ...item, task: taskText });
+		}
 		toggleEdit();
-	}
+	};
 
-	function toggleEdit() {
+	const toggleEdit = () => {
 		setIsEditing((prevInEdit) => !prevInEdit);
-	}
+	};
 
-	function updateKeyDown(e: React.KeyboardEvent) {
+	const updateKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === "Enter") {
 			submitUpdate();
 		}
 		if (e.key === "Escape") {
 			toggleEdit();
 		}
-	}
+	};
 
 	return (
-		<li key={props.item.id}>
+		<li key={item.id}>
 			<label
-				htmlFor={props.item.id}
+				htmlFor={item.id}
 				className={clsx("task-item", { editing: isEditing })}
 			>
 				{isEditing ? (
@@ -65,19 +64,16 @@ export default function Task(props: TaskProps) {
 					</>
 				) : (
 					<>
-						<button
-							className="task-state"
-							onClick={() => props.toggleCheck(props.item.id)}
-						>
-							{props.item.isCompleted ? "✔" : " "}
+						<button className="task-state" onClick={() => toggleCheck(item.id)}>
+							{item.isCompleted ? "✔" : " "}
 						</button>
-						<span className="task-name">{props.item.task}</span>
-						{props.item.isCompleted ? null : (
+						<span className="task-name">{item.task}</span>
+						{item.isCompleted ? null : (
 							<div className="action-buttons">
 								<button onClick={toggleEdit} className="edit-button">
 									Edit
 								</button>
-								<button onClick={props.deleteTask} className="delete-button">
+								<button onClick={deleteTask} className="delete-button">
 									Delete
 								</button>
 							</div>

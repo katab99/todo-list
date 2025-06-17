@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import Task from "./Task.js";
+import Task from "./Task";
 
-type TaskType = {
+export type TaskType = {
 	id: string;
 	task: string;
 	isCompleted: boolean;
@@ -12,56 +12,42 @@ export default function Main() {
 	const [newTask, setNewTask] = useState("");
 	const [taskList, setTaskList] = useState<TaskType[]>([]);
 
-	function divideTaskList(isCompletedList: boolean) {
-		return taskList
-			.filter((item) => item.isCompleted === isCompletedList)
-			.map((item) => {
-				return (
-					<Task
-						key={item.id}
-						item={item}
-						toggleCheck={() => toggleCheck(item.id)}
-						deleteTask={() => deleteTask(item.id)}
-						updateTask={updateTaskList}
-					/>
-				);
-			});
-	}
+	const todoListItems = taskList.filter((item) => item.isCompleted === false);
+	const completedListItems = taskList.filter(
+		(item) => item.isCompleted === true
+	);
 
-	const todoListItems = divideTaskList(false);
-	const completedListItems = divideTaskList(true);
-
-	function addTask() {
+	const addTask = () => {
 		setTaskList((prevList) => [
 			...prevList,
 			{ id: nanoid(), task: newTask, isCompleted: false },
 		]);
 		setNewTask("");
-	}
+	};
 
-	function updateTaskList(updatedTask: TaskType) {
+	const updateTaskList = (updatedTask: TaskType) => {
 		setTaskList((prevList) =>
 			prevList.map((task) => (task.id === updatedTask.id ? updatedTask : task))
 		);
-	}
+	};
 
-	function deleteTask(id: string) {
+	const deleteTask = (id: string) => {
 		setTaskList((prevList) => prevList.filter((item) => item.id !== id));
-	}
+	};
 
-	function toggleCheck(id: string) {
+	const toggleCheck = (id: string) => {
 		setTaskList((prevList) =>
 			prevList.map((item) =>
 				item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
 			)
 		);
-	}
+	};
 
-	function addTaskKeyDown(e: React.KeyboardEvent) {
+	const addTaskKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === "Enter") {
 			addTask();
 		}
-	}
+	};
 
 	return (
 		<main>
@@ -82,14 +68,38 @@ export default function Main() {
 			{todoListItems.length > 0 ? (
 				<section className="list-container">
 					<p className="list-title">Your TODOs</p>
-					<ul className="task-list">{todoListItems}</ul>
+					<ul className="task-list">
+						{todoListItems.map((item) => {
+							return (
+								<Task
+									key={item.id}
+									item={item}
+									toggleCheck={() => toggleCheck(item.id)}
+									deleteTask={() => deleteTask(item.id)}
+									updateTask={updateTaskList}
+								/>
+							);
+						})}
+					</ul>
 				</section>
 			) : null}
 
 			{completedListItems.length > 0 ? (
 				<section className="list-container">
 					<p className="list-title">Completed Tasks</p>
-					<ul className="task-list">{completedListItems}</ul>
+					<ul className="task-list">
+						{completedListItems.map((item) => {
+							return (
+								<Task
+									key={item.id}
+									item={item}
+									toggleCheck={() => toggleCheck(item.id)}
+									deleteTask={() => deleteTask(item.id)}
+									updateTask={updateTaskList}
+								/>
+							);
+						})}
+					</ul>
 				</section>
 			) : null}
 		</main>
