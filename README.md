@@ -13,7 +13,7 @@ In this project, operations are implemented, such as:
 
 ## Tech Stack
 
-- React.js
+- React
 - CSS
 
 ## Development
