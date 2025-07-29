@@ -1,25 +1,35 @@
 import { Link } from "react-router";
-import { taskLists } from "../../taskLists";
-//crypto.randomUUID()
+// TODO : types from one source !!!
+type TaskItem = {
+	id: string;
+	task: string;
+	isCompleted: boolean;
+};
+
+type TaskList = {
+	id: string;
+	name: string;
+	taskList: TaskItem[];
+};
+
 export default function SideBar() {
+	const localStorageString = localStorage.getItem("taskLists") ?? "";
+	const localStorageArray: TaskList[] = JSON.parse(localStorageString || "[]");
+
 	return (
 		<div className="sidebar-container">
 			<Link to="/" className="page-title link">
 				ToDo Lists
 			</Link>
 			<nav>
-				{/* <Link to="user" className="link">
-					User
-				</Link> */}
-
 				{/* Map over the task lists */}
-				{taskLists.map((list) => (
-					<Link to={list.id} className="link">
+				{localStorageArray.map((list) => (
+					<Link to={`list/${list.id}`} className="link">
 						{list.name}
 					</Link>
 				))}
+				<Link to="list/new">Add New List</Link>
 			</nav>
-			<button>Add New List</button>
 		</div>
 	);
 }

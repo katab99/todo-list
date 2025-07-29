@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Header from "./components/Header";
 import Main from "./components/Main";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import User from "./pages/User";
+import NewList from "./pages/NewList";
 
 export default function App() {
 	return (
@@ -11,14 +10,10 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
-					{/* <Route path="user" element={<User />} /> */}
-					<Route path=":listid" element={<Main />} />
+					<Route path="list/:listid" element={<Main />} />
+					<Route path="list/new" element={<NewList />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
-		// <>
-		// 	<Header />
-		// 	<Main />
-		// </>
 	);
 }

@@ -15,6 +15,8 @@ export default function Main() {
 	const [newTask, setNewTask] = useState("");
 	const [taskList, setTaskList] = useState<TaskType[]>([]);
 
+	// TODO : implement localStorage
+
 	// TODO : rethink this part
 	// get the task list from "database"
 	// [listid] - so when the route changes, the displayed list also changes
@@ -67,7 +69,7 @@ export default function Main() {
 				<input
 					className="add-task-text"
 					type="text"
-					placeholder="e.g. sleeping"
+					placeholder="e.g. clean up the kitchen"
 					value={newTask}
 					onChange={(e) => setNewTask(e.target.value)}
 					onKeyDown={addTaskKeyDown}
