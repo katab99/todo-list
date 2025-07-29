@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { taskLists } from "../../taskLists";
-
+//crypto.randomUUID()
 export default function SideBar() {
 	return (
 		<div className="sidebar-container">
@@ -8,9 +8,9 @@ export default function SideBar() {
 				ToDo Lists
 			</Link>
 			<nav>
-				<Link to="user" className="link">
+				{/* <Link to="user" className="link">
 					User
-				</Link>
+				</Link> */}
 
 				{/* Map over the task lists */}
 				{taskLists.map((list) => (

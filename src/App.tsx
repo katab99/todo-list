@@ -11,7 +11,7 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
-					<Route path="user" element={<User />} />
+					{/* <Route path="user" element={<User />} /> */}
 					<Route path=":listid" element={<Main />} />
 				</Route>
 			</Routes>
