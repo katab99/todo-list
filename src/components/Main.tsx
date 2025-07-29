@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { nanoid } from "nanoid";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { nanoid } from "nanoid"; // TODO : crypto.randomUUID(),
 import Task from "./Task";
+import { taskLists } from "../../taskLists";
 
 export type TaskType = {
 	id: string;
@@ -9,8 +11,18 @@ export type TaskType = {
 };
 
 export default function Main() {
+	const { listid } = useParams();
 	const [newTask, setNewTask] = useState("");
 	const [taskList, setTaskList] = useState<TaskType[]>([]);
+
+	// TODO : rethink this part
+	// get the task list from "database"
+	// [listid] - so when the route changes, the displayed list also changes
+	useEffect(() => {
+		taskLists
+			.filter((list) => list.id == listid)
+			.map((item) => setTaskList(item.taskList));
+	}, [listid]);
 
 	const todoListItems = taskList.filter((item) => item.isCompleted === false);
 	const completedListItems = taskList.filter(
