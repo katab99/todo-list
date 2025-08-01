@@ -9,7 +9,7 @@ type TaskItem = {
 type TaskList = {
 	id: string;
 	name: string;
-	taskList: TaskItem[];
+	taskItems: TaskItem[];
 };
 
 export default function SideBar() {
@@ -22,13 +22,13 @@ export default function SideBar() {
 				ToDo Lists
 			</Link>
 			<nav>
+				<Link to="list/new">Add New List</Link>
 				{/* Map over the task lists */}
 				{localStorageArray.map((list) => (
 					<Link to={`list/${list.id}`} className="link">
 						{list.name}
 					</Link>
 				))}
-				<Link to="list/new">Add New List</Link>
 			</nav>
 		</div>
 	);

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { nanoid } from "nanoid"; // TODO : crypto.randomUUID(),
 import Task from "./Task";
 import { taskLists } from "../../taskLists";
 
-export type TaskType = {
+export type TaskItem = {
 	id: string;
 	task: string;
 	isCompleted: boolean;
@@ -13,7 +12,7 @@ export type TaskType = {
 export default function Main() {
 	const { listid } = useParams();
 	const [newTask, setNewTask] = useState("");
-	const [taskList, setTaskList] = useState<TaskType[]>([]);
+	const [taskList, setTaskList] = useState<TaskItem[]>([]);
 
 	// TODO : implement localStorage
 
@@ -34,12 +33,12 @@ export default function Main() {
 	const addTask = () => {
 		setTaskList((prevList) => [
 			...prevList,
-			{ id: nanoid(), task: newTask, isCompleted: false },
+			{ id: crypto.randomUUID(), task: newTask, isCompleted: false },
 		]);
 		setNewTask("");
 	};
 
-	const updateTaskList = (updatedTask: TaskType) => {
+	const updateTaskList = (updatedTask: TaskItem) => {
 		setTaskList((prevList) =>
 			prevList.map((task) => (task.id === updatedTask.id ? updatedTask : task))
 		);
