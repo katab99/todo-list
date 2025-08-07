@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import { useLocalStorage } from "usehooks-ts";
+
 // TODO : types from one source !!!
 type TaskItem = {
 	id: string;
@@ -13,8 +15,10 @@ type TaskList = {
 };
 
 export default function SideBar() {
-	const localStorageString = localStorage.getItem("taskLists") ?? "";
-	const localStorageArray: TaskList[] = JSON.parse(localStorageString || "[]");
+	const [taskLists, setTaskLists] = useLocalStorage<TaskList[]>(
+		"taskLists",
+		[]
+	);
 
 	return (
 		<div className="sidebar-container">
@@ -24,7 +28,7 @@ export default function SideBar() {
 			<nav>
 				<Link to="list/new">Add New List</Link>
 				{/* Map over the task lists */}
-				{localStorageArray.map((list) => (
+				{taskLists.map((list) => (
 					<Link to={`list/${list.id}`} className="link">
 						{list.name}
 					</Link>

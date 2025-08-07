@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 type TaskItem = {
 	id: string;
@@ -8,26 +9,27 @@ type TaskItem = {
 type TaskList = {
 	id: string;
 	name: string;
-	taskList: TaskItem[];
+	taskItems: TaskItem[];
 };
 
 export default function NewList() {
+	const [taskLists, setTaskLists] = useLocalStorage<TaskList[]>(
+		"taskLists",
+		[]
+	);
 	const [listName, setListName] = useState("");
 
+	// TODO: redirect to new List in the end
 	const addList = () => {
-		// TODO : cannot sumbit without giving any name
-		// TODO: redirect to new List in the end
-
-		const listsString = localStorage.getItem("taskLists") ?? "";
-		const listsArray = JSON.parse(listsString || "[]");
+		if (!listName.trim) return;
 
 		const newList: TaskList = {
 			id: crypto.randomUUID(),
-			name: listName,
-			taskList: [],
+			name: listName.trim(),
+			taskItems: [],
 		};
 
-		localStorage.setItem("taskLists", JSON.stringify([...listsArray, newList]));
+		setTaskLists((prevList) => [...prevList, newList]);
 		setListName("");
 	};
 

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { clsx } from "clsx";
-import { TaskType } from "./Main";
+import { TaskItem } from "./Main";
 
 type TaskProps = {
-	item: TaskType;
+	item: TaskItem;
 	toggleCheck: (id: string) => void;
-	updateTask?: (task: TaskType) => void;
+	updateTask?: (task: TaskItem) => void;
 	deleteTask?: () => void;
 };
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Task from "./Task";
-import { taskLists } from "../../taskLists";
+import { useLocalStorage } from "usehooks-ts";
 
 export type TaskItem = {
 	id: string;
@@ -9,51 +9,82 @@ export type TaskItem = {
 	isCompleted: boolean;
 };
 
+type TaskList = {
+	id: string;
+	name: string;
+	taskItems: TaskItem[];
+};
+
 export default function Main() {
-	const { listid } = useParams();
+	const { listId } = useParams();
 	const [newTask, setNewTask] = useState("");
-	const [taskList, setTaskList] = useState<TaskItem[]>([]);
-
-	// TODO : implement localStorage
-
-	// TODO : rethink this part
-	// get the task list from "database"
-	// [listid] - so when the route changes, the displayed list also changes
-	useEffect(() => {
-		taskLists
-			.filter((list) => list.id == listid)
-			.map((item) => setTaskList(item.taskList));
-	}, [listid]);
-
-	const todoListItems = taskList.filter((item) => item.isCompleted === false);
-	const completedListItems = taskList.filter(
-		(item) => item.isCompleted === true
+	const [storedLists, setStoredLists] = useLocalStorage<TaskList[]>(
+		"taskLists",
+		[]
 	);
+	const [currentList, setCurrentList] = useState<TaskList | null>(null);
+	//const [currentItems, setCurrentItems] = useState<TaskItem[]>([]);
+
+	// load current list from local storage
+	useEffect(() => {
+		const found = storedLists.find((list) => list.id === listId);
+		if (found) setCurrentList({ ...found });
+	}, [listId]);
+
+	// auto-save current list to local storage
+	useEffect(() => {
+		if (!currentList) return;
+
+		setStoredLists((prev) =>
+			prev.map((list) => (list.id === currentList.id ? currentList : list))
+		);
+	}, [currentList, setStoredLists]);
+
+	const todoListItems =
+		currentList?.taskItems.filter((item) => item.isCompleted === false) ?? [];
+
+	const completedListItems =
+		currentList?.taskItems.filter((item) => item.isCompleted === true) ?? [];
 
 	const addTask = () => {
-		setTaskList((prevList) => [
-			...prevList,
-			{ id: crypto.randomUUID(), task: newTask, isCompleted: false },
-		]);
+		if (!currentList) return;
+
+		const newItem: TaskItem = {
+			id: crypto.randomUUID(),
+			task: newTask,
+			isCompleted: false,
+		};
+
+		const newTaskItems: TaskItem[] = [...currentList.taskItems, newItem];
+		setCurrentList({ ...currentList, taskItems: newTaskItems });
 		setNewTask("");
 	};
 
 	const updateTaskList = (updatedTask: TaskItem) => {
-		setTaskList((prevList) =>
-			prevList.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+		if (!currentList) return;
+
+		const updatedTaskItems = currentList.taskItems.map((task) =>
+			task.id === updatedTask.id ? updatedTask : task
 		);
+		setCurrentList({ ...currentList, taskItems: updatedTaskItems });
 	};
 
 	const deleteTask = (id: string) => {
-		setTaskList((prevList) => prevList.filter((item) => item.id !== id));
+		if (!currentList) return;
+
+		const keptTaskItems = currentList.taskItems.filter(
+			(task) => task.id !== id
+		);
+		setCurrentList({ ...currentList, taskItems: keptTaskItems });
 	};
 
 	const toggleCheck = (id: string) => {
-		setTaskList((prevList) =>
-			prevList.map((item) =>
-				item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
-			)
+		if (!currentList) return;
+
+		const updatedTaskItems = currentList.taskItems.map((task) =>
+			task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
 		);
+		setCurrentList({ ...currentList, taskItems: updatedTaskItems });
 	};
 
 	const addTaskKeyDown = (e: React.KeyboardEvent) => {
