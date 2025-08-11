@@ -95,7 +95,9 @@ export default function Main() {
 
 	return (
 		<main>
+			<h1>{currentList && currentList.name}</h1>
 			<section className="add-task-container">
+				<label htmlFor="">Add a new task</label>
 				<input
 					className="add-task-text"
 					type="text"
@@ -111,7 +113,7 @@ export default function Main() {
 
 			{todoListItems.length > 0 ? (
 				<section className="list-container">
-					<p className="list-title">{currentList && currentList.name}</p>
+					<h3 className="list-title">todo</h3>
 					<ul className="task-list">
 						{todoListItems.map((item) => {
 							return (
@@ -130,20 +132,18 @@ export default function Main() {
 
 			{completedListItems.length > 0 ? (
 				<section className="list-container">
-					<p className="list-title">done</p>
-					<ul className="task-list">
-						{completedListItems.map((item) => {
-							return (
-								<Task
-									key={item.id}
-									item={item}
-									toggleCheck={() => toggleCheck(item.id)}
-									deleteTask={() => deleteTask(item.id)}
-									updateTask={updateTaskList}
-								/>
-							);
-						})}
-					</ul>
+					<h3 className="list-title">done</h3>
+					{completedListItems.map((item) => {
+						return (
+							<Task
+								key={item.id}
+								item={item}
+								toggleCheck={() => toggleCheck(item.id)}
+								deleteTask={() => deleteTask(item.id)}
+								updateTask={updateTaskList}
+							/>
+						);
+					})}
 				</section>
 			) : null}
 		</main>

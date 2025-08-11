@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { clsx } from "clsx";
 import { TaskItem } from "./Main";
+import { Checkbox } from "radix-ui";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 type TaskProps = {
 	item: TaskItem;
@@ -39,48 +41,55 @@ export default function Task({
 	};
 
 	return (
-		<li key={item.id}>
-			<label
-				htmlFor={item.id}
-				className={clsx("task-item", { editing: isEditing })}
-			>
-				{isEditing ? (
-					<>
-						<input
-							className="task-update"
-							type="text"
-							value={taskText}
-							onChange={(e) => setTaskText(e.target.value)}
-							onKeyDown={updateKeyDown}
-						/>
+		<div
+			key={item.id}
+			className={clsx("task-item-container", { taskItemEditing: isEditing })}
+		>
+			{isEditing ? (
+				<>
+					<input
+						className="task-update"
+						type="text"
+						value={taskText}
+						onChange={(e) => setTaskText(e.target.value)}
+						onKeyDown={updateKeyDown}
+					/>
+					<div className="action-buttons">
+						<button type="submit" className="btn" onClick={submitUpdate}>
+							Save
+						</button>
+						<button type="button" className="btn" onClick={toggleEdit}>
+							Cancel
+						</button>
+					</div>
+				</>
+			) : (
+				<>
+					<Checkbox.Root
+						className="CheckboxRoot"
+						id={item.id}
+						checked={item.isCompleted}
+						onCheckedChange={() => toggleCheck(item.id)}
+					>
+						<Checkbox.Indicator className="ChechboxIndicator">
+							<CheckIcon />
+						</Checkbox.Indicator>
+					</Checkbox.Root>
+
+					<span>{item.task}</span>
+
+					{item.isCompleted ? null : (
 						<div className="action-buttons">
-							<button type="submit" onClick={submitUpdate}>
-								Save
+							<button onClick={toggleEdit} className="btn">
+								Edit
 							</button>
-							<button type="button" onClick={toggleEdit}>
-								Cancel
+							<button onClick={deleteTask} className="btn">
+								Delete
 							</button>
 						</div>
-					</>
-				) : (
-					<>
-						<button className="task-state" onClick={() => toggleCheck(item.id)}>
-							{item.isCompleted ? "✔" : " "}
-						</button>
-						<span className="task-name">{item.task}</span>
-						{item.isCompleted ? null : (
-							<div className="action-buttons">
-								<button onClick={toggleEdit} className="btn">
-									Edit
-								</button>
-								<button onClick={deleteTask} className="btn">
-									Delete
-								</button>
-							</div>
-						)}
-					</>
-				)}
-			</label>
-		</li>
+					)}
+				</>
+			)}
+		</div>
 	);
 }
