@@ -1,11 +1,38 @@
-html,
-body {
-	margin: 0;
-	color: #080705;
-	font-family: Rubik, sans-serif;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
 
-/* -- layout */
+/* base color palette - light theme */
+:root {
+	--bg-dark: hsl(0 0% 90%);
+	--bg: hsl(0 0% 95%);
+	--bg-light: hsl(0 0% 100%);
+	--text: hsl(0 0 5%);
+	--text-muted: hsl(0 0% 30%);
+}
+
+/* accent color ??  to hover and focus on links and buttons*/
+
+/* dark theme -- LATER
+body.dark {
+--bg-dark: hsl(0 0% 0%);
+	--bg: hsl(0 0% 5%);
+	--bg-light: hsl(0 0% 10%);
+	--text: hsl(0 0 95%);
+	--text-muted: hsl(0 0% 70%);
+}
+*/
+
+body {
+	margin: 0;
+	font-family: Rubik, sans-serif;
+	background: var(--bg-dark);
+	color: var(--text-muted);
+}
+
+/* --- LAYOUT  ---*/
 .site-container {
 	min-height: 100vh;
 	display: grid;
@@ -13,6 +40,12 @@ body {
 }
 
 /* -- sidebar */
+nav {
+	display: flex;
+	flex-direction: column;
+	padding: 12px 0;
+}
+
 .sidebar-container {
 	display: flex;
 	flex-direction: column;
@@ -27,14 +60,8 @@ body {
 }
 
 .link {
-	color: #080705;
+	color: var(--text-muted);
 	text-decoration: none;
-}
-
-nav {
-	display: flex;
-	flex-direction: column;
-	padding: 12px 0;
 }
 
 /* -- header */
@@ -135,7 +162,35 @@ ul {
 	margin: 0;
 }
 
-button {
+.btn,
+.checkbox {
+	background: var(--bg-light);
+	color: var(--text);
+	border: 1px solid var(--text);
+	border-radius: 2px;
+}
+
+.btn {
+	padding: 10px 20px;
+	text-align: center;
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.btn:hover,
+.btn:focus,
+.checkbox:hover,
+.checkbox:focus {
+	background-color: var(--bg);
+	cursor: pointer;
+}
+
+.checkbox {
+	padding: 1em;
+}
+
+/* button {
 	background: #fff;
 	color: #080705;
 	padding: 10px 20px;
@@ -144,8 +199,4 @@ button {
 	font-size: 0.9rem;
 	font-weight: 600;
 	height: 40px;
-}
-
-button:hover {
-	cursor: pointer;
-}
+} */

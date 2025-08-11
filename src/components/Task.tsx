@@ -70,10 +70,10 @@ export default function Task({
 						<span className="task-name">{item.task}</span>
 						{item.isCompleted ? null : (
 							<div className="action-buttons">
-								<button onClick={toggleEdit} className="edit-button">
+								<button onClick={toggleEdit} className="btn">
 									Edit
 								</button>
-								<button onClick={deleteTask} className="delete-button">
+								<button onClick={deleteTask} className="btn">
 									Delete
 								</button>
 							</div>

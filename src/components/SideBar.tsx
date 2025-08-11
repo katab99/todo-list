@@ -26,7 +26,9 @@ export default function SideBar() {
 				ToDo Lists
 			</Link>
 			<nav>
-				<Link to="list/new">Add New List</Link>
+				<Link to="list/new" className="btn">
+					Add New List
+				</Link>
 				{/* Map over the task lists */}
 				{taskLists.map((list) => (
 					<Link to={`list/${list.id}`} className="link">

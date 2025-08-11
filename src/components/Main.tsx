@@ -104,14 +104,14 @@ export default function Main() {
 					onChange={(e) => setNewTask(e.target.value)}
 					onKeyDown={addTaskKeyDown}
 				/>
-				<button type="submit" className="add-task-button" onClick={addTask}>
+				<button type="submit" className="btn" onClick={addTask}>
 					Add
 				</button>
 			</section>
 
 			{todoListItems.length > 0 ? (
 				<section className="list-container">
-					<p className="list-title">Your TODOs</p>
+					<p className="list-title">{currentList && currentList.name}</p>
 					<ul className="task-list">
 						{todoListItems.map((item) => {
 							return (
@@ -130,7 +130,7 @@ export default function Main() {
 
 			{completedListItems.length > 0 ? (
 				<section className="list-container">
-					<p className="list-title">Completed Tasks</p>
+					<p className="list-title">done</p>
 					<ul className="task-list">
 						{completedListItems.map((item) => {
 							return (
