@@ -15,7 +15,7 @@ type TaskList = {
 	taskItems: TaskItem[];
 };
 
-export default function Main() {
+export default function TaskList() {
 	const { listId } = useParams();
 	const [newTask, setNewTask] = useState("");
 	const [storedLists, setStoredLists] = useLocalStorage<TaskList[]>(
@@ -87,16 +87,13 @@ export default function Main() {
 		setCurrentList({ ...currentList, taskItems: updatedTaskItems });
 	};
 
-	const addTaskKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "Enter") {
-			addTask();
-		}
-	};
-
 	return (
-		<main>
-			<h1>{currentList && currentList.name}</h1>
-			<section className="add-task-container">
+		<main className="task-list-container">
+			<div className="task-list-header">
+				<h1>{currentList && currentList.name}</h1>
+			</div>
+
+			<form className="add-task-container">
 				<label htmlFor="">Add a new task</label>
 				<input
 					className="add-task-text"
@@ -104,35 +101,32 @@ export default function Main() {
 					placeholder="e.g. clean up the kitchen"
 					value={newTask}
 					onChange={(e) => setNewTask(e.target.value)}
-					onKeyDown={addTaskKeyDown}
 				/>
 				<button type="submit" className="btn" onClick={addTask}>
 					Add
 				</button>
-			</section>
+			</form>
 
 			{todoListItems.length > 0 ? (
-				<section className="list-container">
-					<h3 className="list-title">todo</h3>
-					<ul className="task-list">
-						{todoListItems.map((item) => {
-							return (
-								<Task
-									key={item.id}
-									item={item}
-									toggleCheck={() => toggleCheck(item.id)}
-									deleteTask={() => deleteTask(item.id)}
-									updateTask={updateTaskList}
-								/>
-							);
-						})}
-					</ul>
+				<section>
+					<h3>todo</h3>
+					{todoListItems.map((item) => {
+						return (
+							<Task
+								key={item.id}
+								item={item}
+								toggleCheck={() => toggleCheck(item.id)}
+								deleteTask={() => deleteTask(item.id)}
+								updateTask={updateTaskList}
+							/>
+						);
+					})}
 				</section>
 			) : null}
 
 			{completedListItems.length > 0 ? (
-				<section className="list-container">
-					<h3 className="list-title">done</h3>
+				<section>
+					<h3>done</h3>
 					{completedListItems.map((item) => {
 						return (
 							<Task

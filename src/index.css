@@ -33,48 +33,93 @@ body {
 }
 
 /* --- TYPOGRAPHY --- */
+h1,
+h3,
+.page-title {
+	color: var(--text);
+	margin: 0;
+}
+
+h1 {
+	font-size: 1.75rem;
+}
+
+h3 {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 0.5em;
+}
+
+.page-title,
+.link {
+	color: var(--text);
+	text-decoration: none;
+}
 
 .page-title {
-	font-size: 1.2em;
+	margin: 0 0 0.9em 0;
+	border-bottom: 1px solid var(--text-muted);
+	font-size: 2rem;
 	font-weight: 600;
-	padding-bottom: 30px;
+}
+
+.link {
+	margin: 0.5em 0;
 }
 
 /* --- LAYOUT  ---*/
-.site-container {
-	min-height: 100vh;
-	display: grid;
-	grid-template-columns: 1fr 5fr;
+.sidebar-container,
+.site-container,
+.task-list-container,
+nav {
+	display: flex;
+	flex-direction: column;
 }
 
+/* -- nav-bar */
+.sidebar-container {
+	background: var(--bg);
+	padding: 1em;
+}
+
+nav {
+	margin: 1em 0;
+}
+
+/* -- main-content */
+.site-container {
+	min-height: 100vh;
+	/* display: grid;
+	grid-template-columns: 1fr 5fr; */
+}
+
+/* -- task-list */
+.task-list-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.task-list-header {
+	text-align: center;
+	margin-top: 1em;
+}
+
+.add-task-container {
+	margin: 0;
+}
+
+/* -- task-item */
 .task-item-container {
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 	align-items: center;
 	gap: 1em;
 	padding: 0.75em 1em;
-	margin-bottom: 1em;
+	margin: 0 0.5em 1em 0.5em;
 	background: var(--bg);
 }
 
 /* -- sidebar */
-nav {
-	display: flex;
-	flex-direction: column;
-	padding: 12px 0;
-}
-
-.sidebar-container {
-	display: flex;
-	flex-direction: column;
-	background: #edede9;
-	padding: 25px;
-}
-
-.link {
-	color: var(--text-muted);
-	text-decoration: none;
-}
 
 /* -- header */
 header {
@@ -83,11 +128,6 @@ header {
 	padding: 16px;
 	font-weight: 600;
 	font-size: large;
-}
-
-p.page-title {
-	display: flex;
-	justify-content: center;
 }
 
 /* -- main */
@@ -99,18 +139,6 @@ p.page-title {
 
 .add-task-container > * {
 	margin: 20px;
-}
-
-section.list-container {
-	width: 100%;
-	max-width: 800px;
-	margin: 0 auto;
-}
-
-p.list-title {
-	display: flex;
-	justify-content: center;
-	font-weight: 600;
 }
 
 .taskItemEditing {
@@ -186,7 +214,7 @@ input:focus {
 	background-color: var(--bg-light);
 	width: 25px;
 	height: 25px;
-	border-radius: 4px;
+	border-radius: 50%;
 	border: 0.1em solid var(--text-muted);
 }
 

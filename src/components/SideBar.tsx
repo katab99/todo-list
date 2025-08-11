@@ -22,13 +22,13 @@ export default function SideBar() {
 
 	return (
 		<div className="sidebar-container">
-			<Link to="/" className="page-title link">
+			<Link to="/" className="page-title">
 				ToDo Lists
 			</Link>
+			<Link to="list/new" className="btn">
+				Add New List
+			</Link>
 			<nav>
-				<Link to="list/new" className="btn">
-					Add New List
-				</Link>
 				{/* Map over the task lists */}
 				{taskLists.map((list) => (
 					<Link to={`list/${list.id}`} className="link">
