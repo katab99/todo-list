@@ -94,15 +94,15 @@ export default function TaskList() {
 			</div>
 
 			<form className="add-task-container">
-				<label htmlFor="">Add a new task</label>
 				<input
-					className="add-task-text"
+					className="add-task-input"
 					type="text"
 					placeholder="e.g. clean up the kitchen"
 					value={newTask}
 					onChange={(e) => setNewTask(e.target.value)}
 				/>
-				<button type="submit" className="btn" onClick={addTask}>
+
+				<button type="submit" className="add-task-btn btn" onClick={addTask}>
 					Add
 				</button>
 			</form>
