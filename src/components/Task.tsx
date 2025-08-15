@@ -1,15 +1,8 @@
 import { useState } from "react";
 import { clsx } from "clsx";
-import { TaskItem } from "./TaskList";
 import { Checkbox } from "radix-ui";
 import { CheckIcon } from "@radix-ui/react-icons";
-
-type TaskProps = {
-	item: TaskItem;
-	toggleCheck: (id: string) => void;
-	updateTask?: (task: TaskItem) => void;
-	deleteTask?: () => void;
-};
+import { TaskProps } from "../types";
 
 export default function Task({
 	item,

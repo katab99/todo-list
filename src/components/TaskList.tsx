@@ -2,18 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Task from "./Task";
 import { useLocalStorage } from "usehooks-ts";
-
-export type TaskItem = {
-	id: string;
-	task: string;
-	isCompleted: boolean;
-};
-
-type TaskList = {
-	id: string;
-	name: string;
-	taskItems: TaskItem[];
-};
+import { TaskItem, TaskList } from "../types";
 
 export default function TaskList() {
 	const { listId } = useParams();

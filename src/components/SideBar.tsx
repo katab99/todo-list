@@ -1,18 +1,6 @@
 import { Link } from "react-router";
 import { useLocalStorage } from "usehooks-ts";
-
-// TODO : types from one source !!!
-type TaskItem = {
-	id: string;
-	task: string;
-	isCompleted: boolean;
-};
-
-type TaskList = {
-	id: string;
-	name: string;
-	taskItems: TaskItem[];
-};
+import { TaskList } from "../types";
 
 export default function SideBar() {
 	const [taskLists, setTaskLists] = useLocalStorage<TaskList[]>(

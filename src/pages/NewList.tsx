@@ -1,16 +1,6 @@
 import { useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-
-type TaskItem = {
-	id: string;
-	task: string;
-	isCompleted: boolean;
-};
-type TaskList = {
-	id: string;
-	name: string;
-	taskItems: TaskItem[];
-};
+import { TaskList } from "../types";
 
 export default function NewList() {
 	const [taskLists, setTaskLists] = useLocalStorage<TaskList[]>(
