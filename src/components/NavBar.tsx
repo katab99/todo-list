@@ -12,7 +12,7 @@ type CustomLinkProps = {
 function CustomLink({ href, children }: CustomLinkProps) {
 	return (
 		<NavigationMenu.Link asChild>
-			<Link to={href} className="nav-menu-link">
+			<Link to={href} className="link">
 				{children}
 			</Link>
 		</NavigationMenu.Link>
@@ -29,13 +29,13 @@ export default function NavBar() {
 		<>
 			<NavigationMenu.Root>
 				{taskLists.length > 0 ? (
-					<NavigationMenu.List>
+					<NavigationMenu.List className="nav-menu-list">
 						<NavigationMenu.Item className="nav-menu-item">
 							<NavigationMenu.Trigger className="nav-menu-trigger">
 								Task Lists
 							</NavigationMenu.Trigger>
 
-							<NavigationMenu.Content className="NavMenuContent">
+							<NavigationMenu.Content className="nav-menu-content">
 								{taskLists.map((list) => (
 									<CustomLink href={`list/${list.id}`}>{list.name}</CustomLink>
 								))}

@@ -9,12 +9,10 @@ const Header = () => {
 
 	return (
 		<header className="site-header">
-			<Link to="/" className="site-title">
+			<Link to="/" className="site-title link">
 				ToDo Lists
 			</Link>
-			<Link to="list/new" className="btn">
-				Add New List
-			</Link>
+
 			<Collapsible.Root
 				className="collapsible-root"
 				open={open}
@@ -25,7 +23,10 @@ const Header = () => {
 						{open ? <Cross2Icon /> : <HamburgerMenuIcon />}
 					</button>
 				</Collapsible.Trigger>
-				<Collapsible.Content>
+				<Collapsible.Content className="collapsible-content">
+					<Link to="list/new" className="link">
+						New list
+					</Link>
 					<NavBar />
 				</Collapsible.Content>
 			</Collapsible.Root>

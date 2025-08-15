@@ -1,6 +1,8 @@
 *,
 *::before,
 *::after {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
@@ -32,7 +34,7 @@ body.dark {
 body {
 	margin: 0;
 	font-family: Rubik, sans-serif;
-	background: var(--bg-dark);
+	background: var(--bg-light);
 	color: var(--text-muted);
 }
 
@@ -59,7 +61,7 @@ h3 {
 	text-decoration: none;
 }
 
-.page-title {
+.site-title {
 	margin: 0 0 0.9em 0;
 	font-size: 2rem;
 	font-weight: 600;
@@ -79,29 +81,61 @@ h3 {
 }
 
 /* --- LAYOUT  ---*/
-.sidebar-container,
 .site-container,
-.task-list-container,
-nav {
+.task-list-container {
 	display: flex;
 	flex-direction: column;
 }
 
-/* -- nav-bar */
-.sidebar-container {
-	background: var(--bg);
+/* -- header */
+.site-header {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 	padding: 1em;
+	background: greenyellow;
 }
 
-nav {
-	margin: 1em 0;
+.collapsible-root {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
 }
 
+.collapsible-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.icon-btn {
+	font-family: inherit;
+	font-weight: 700;
+	background: var(--bg-light);
+	color: var(--text);
+	border: none;
+}
+
+.nav-menu-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.nav-menu-trigger {
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	background: none;
+	border: none;
+}
+
+.nav-menu-content {
+	display: flex;
+	flex-direction: column;
+}
 /* -- main-content */
 .site-container {
 	min-height: 100vh;
-	/* display: grid;
-	grid-template-columns: 1fr 5fr; */
 }
 
 /* -- add-task */
@@ -144,16 +178,7 @@ nav {
 	box-shadow: 0px 4px 4px #00000030, 0px 12px 12px #00000015;
 }
 
-/* -- sidebar */
-
-/* -- header */
-header {
-	background: #ccdbdc;
-	margin: 0 auto;
-	padding: 16px;
-	font-weight: 600;
-	font-size: large;
-}
+/* ---- */
 
 .taskItemEditing {
 	display: grid;
