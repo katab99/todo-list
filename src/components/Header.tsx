@@ -25,7 +25,7 @@ const Header = () => {
 				</Collapsible.Trigger>
 				<Collapsible.Content className="collapsible-content">
 					<Link to="list/new" className="link">
-						New list
+						Add new list
 					</Link>
 					<NavBar />
 				</Collapsible.Content>
