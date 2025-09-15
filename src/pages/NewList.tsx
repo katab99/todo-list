@@ -25,18 +25,19 @@ export default function NewList() {
 
 	return (
 		<main>
-			<section className="add-task-container">
+			<h1 className="task-list-header">New List</h1>
+			<form className="add-item-container">
 				<input
-					className="add-task-text"
+					className="add-item-input"
 					type="text"
 					placeholder="groceries"
 					value={listName}
 					onChange={(e) => setListName(e.target.value)}
 				/>
-				<button type="submit" className="add-task-button" onClick={addList}>
-					Add new list
+				<button type="submit" className="add-item-btn btn" onClick={addList}>
+					Add New List
 				</button>
-			</section>
+			</form>
 		</main>
 	);
 }

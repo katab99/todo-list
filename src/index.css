@@ -27,10 +27,9 @@ body {
 
 /* --- TYPOGRAPHY --- */
 h1,
-h3,
-.page-title {
+h3 {
 	color: var(--text);
-	margin: 0;
+	margin: 0 auto;
 }
 
 h1 {
@@ -54,12 +53,6 @@ input:focus {
 	transition: border-bottom 0.01s;
 }
 
-.page-title,
-.link {
-	color: var(--text);
-	text-decoration: none;
-}
-
 .site-title {
 	margin-bottom: 0.9em;
 	font-size: 2rem;
@@ -68,6 +61,8 @@ input:focus {
 
 .link {
 	margin: 0.5em 0;
+	color: var(--text);
+	text-decoration: none;
 }
 
 .link:focus,
@@ -84,14 +79,21 @@ input:focus {
 }
 
 /* --- LAYOUT  ---*/
+/* main, */
 .site-header,
 .collapsible-root,
 .collapsible-content,
 .nav-menu-content,
 .site-container,
+.add-item-container,
 .task-list-container {
 	display: flex;
 	flex-direction: column;
+}
+
+/* -- whole site (header + main) */
+.site-container {
+	min-height: 100vh;
 }
 
 /* -- header */
@@ -100,11 +102,6 @@ input:focus {
 	padding: 1em;
 	background: var(--bg);
 	border-bottom: solid 1px var(--bg-dark);
-}
-
-.collapsible-root {
-	margin: auto 0;
-	width: 200px;
 }
 
 .icon-btn {
@@ -136,25 +133,16 @@ input:focus {
 	border: none;
 }
 
-/* -- main-content */
-.site-container {
-	min-height: 100vh;
+/* -- main */
+
+/* -- add-item (new list or task) */
+.add-item-input {
+	margin: 2.25em 3em 0 3em;
+	padding-bottom: 0.5em;
 }
 
-/* -- add-task */
-
-.add-task-container {
-	display: flex;
-	flex-direction: column;
-}
-
-.add-task-container > * {
-	margin: 0 0 1em var(--margin-left);
-	max-width: 80%;
-}
-
-.add-task-input {
-	margin-top: 1.25em;
+.add-item-btn {
+	margin: 1.25em auto;
 }
 
 /* -- task-list */
