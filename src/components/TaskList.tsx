@@ -12,7 +12,6 @@ export default function TaskList() {
 		[]
 	);
 	const [currentList, setCurrentList] = useState<TaskList | null>(null);
-	//const [currentItems, setCurrentItems] = useState<TaskItem[]>([]);
 
 	// load current list from local storage
 	useEffect(() => {

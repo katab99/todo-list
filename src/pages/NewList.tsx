@@ -7,9 +7,9 @@ export default function NewList() {
 		"taskLists",
 		[]
 	);
+
 	const [listName, setListName] = useState("");
 
-	// TODO: redirect to new List in the end
 	const addList = () => {
 		if (!listName.trim) return;
 
@@ -23,9 +23,6 @@ export default function NewList() {
 		setListName("");
 	};
 
-	// TODO : refactor, DRY !!!
-	// this text submit form also in Main.tsx
-	// also .css
 	return (
 		<main>
 			<section className="add-task-container">
@@ -35,7 +32,6 @@ export default function NewList() {
 					placeholder="groceries"
 					value={listName}
 					onChange={(e) => setListName(e.target.value)}
-					// TODO : onKeyDown
 				/>
 				<button type="submit" className="add-task-button" onClick={addList}>
 					Add new list

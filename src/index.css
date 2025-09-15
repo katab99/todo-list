@@ -6,7 +6,6 @@
 	box-sizing: border-box;
 }
 
-/* base color palette - light theme + layout*/
 :root {
 	--bg-dark: hsl(0 0% 90%);
 	--bg: hsl(0 0% 95%);
@@ -18,18 +17,6 @@
 	--secondary: hsl(211 89% 58%);
 	--margin-left: 1.5em;
 }
-
-/* accent color ??  to hover and focus on links and buttons*/
-
-/* dark theme -- LATER
-body.dark {
---bg-dark: hsl(0 0% 0%);
-	--bg: hsl(0 0% 5%);
-	--bg-light: hsl(0 0% 10%);
-	--text: hsl(0 0 95%);
-	--text-muted: hsl(0 0% 70%);
-}
-*/
 
 body {
 	margin: 0;
@@ -53,6 +40,18 @@ h1 {
 h3 {
 	font-size: 1.25rem;
 	margin: 1em 0 1em var(--margin-left);
+}
+
+input {
+	border: none;
+	border-bottom: 1px solid #080705;
+	border-radius: 0;
+}
+
+input:focus {
+	outline: none;
+	border-bottom: 2px solid var(--accent);
+	transition: border-bottom 0.01s;
 }
 
 .page-title,
@@ -215,8 +214,6 @@ div.action-buttons button {
 }
 
 input {
-	/* width: 350px; */
-	background: var(--bg-dark);
 	border: none;
 	border-bottom: 1px solid #080705;
 	border-radius: 0;
@@ -266,14 +263,3 @@ input:focus {
 	box-shadow: 0 0 0 2px var(--bg-dark);
 	cursor: pointer;
 }
-
-/* button {
-	background: #fff;
-	color: #080705;
-	padding: 10px 20px;
-	border: 1px solid #080705;
-	border-radius: 2px;
-	font-size: 0.9rem;
-	font-weight: 600;
-	height: 40px;
-} */

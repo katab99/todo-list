@@ -47,22 +47,5 @@ export default function NavBar() {
 				)}
 			</NavigationMenu.Root>
 		</>
-
-		// <div className="sidebar-container">
-		// 	<Link to="/" className="page-title">
-		// 		ToDo Lists
-		// 	</Link>
-		// 	<Link to="list/new" className="btn">
-		// 		Add New List
-		// 	</Link>
-		// 	<nav>
-		// 		{/* Map over the task lists */}
-		// 		{taskLists.map((list) => (
-		// 			<Link to={`list/${list.id}`} className="link">
-		// 				{list.name}
-		// 			</Link>
-		// 		))}
-		// 	</nav>
-		// </div>
 	);
 }
