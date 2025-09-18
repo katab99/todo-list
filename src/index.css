@@ -92,6 +92,7 @@ input:focus {
 }
 
 /* -- whole site (header + main) */
+
 .site-container {
 	min-height: 100vh;
 }
@@ -133,7 +134,15 @@ input:focus {
 	border: none;
 }
 
-/* -- main */
+/* -- main content*/
+
+/* -- home-page */
+
+.home-page {
+	font-size: 1.25rem;
+	margin: 2em auto;
+	max-width: 80%;
+}
 
 /* -- add-item (new list or task) */
 .add-item-input {
