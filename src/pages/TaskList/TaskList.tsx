@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import Task from "./Task";
+import Task from "../../components/Task/Task";
 import { useLocalStorage } from "usehooks-ts";
-import { TaskItem, TaskList } from "../types";
+import { TaskItem, TaskList } from "../../types";
+import TextInput from "../../components/TextInput/TextInput";
+import Button from "../../components/Button/Button";
 
 export default function TaskList() {
 	const { listId } = useParams();
@@ -82,17 +84,16 @@ export default function TaskList() {
 			</div>
 
 			<form className="add-item-container">
-				<input
-					className="add-item-input"
-					type="text"
+				<TextInput
 					placeholder="e.g. clean up the kitchen"
 					value={newTask}
-					onChange={(e) => setNewTask(e.target.value)}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+						setNewTask(e.target.value)
+					}
 				/>
-
-				<button type="submit" className="add-item-btn btn" onClick={addTask}>
+				<Button type="submit" onClick={addTask}>
 					Add Task
-				</button>
+				</Button>
 			</form>
 
 			{todoListItems.length > 0 ? (

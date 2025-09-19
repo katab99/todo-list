@@ -2,7 +2,9 @@ import { useState } from "react";
 import { clsx } from "clsx";
 import { Checkbox } from "radix-ui";
 import { CheckIcon } from "@radix-ui/react-icons";
-import { TaskProps } from "../types";
+import { TaskProps } from "../../types";
+import Button from "../Button/Button";
+import TextInput from "../TextInput/TextInput";
 
 export default function Task({
 	item,
@@ -25,9 +27,6 @@ export default function Task({
 	};
 
 	const updateKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "Enter") {
-			submitUpdate();
-		}
 		if (e.key === "Escape") {
 			toggleEdit();
 		}
@@ -39,23 +38,19 @@ export default function Task({
 			className={clsx("task-item-container", { taskItemEditing: isEditing })}
 		>
 			{isEditing ? (
-				<>
-					<input
-						className="task-update"
-						type="text"
+				<form>
+					<TextInput
 						value={taskText}
-						onChange={(e) => setTaskText(e.target.value)}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+							setTaskText(e.target.value)
+						}
 						onKeyDown={updateKeyDown}
 					/>
 					<div className="action-buttons">
-						<button type="submit" className="btn" onClick={submitUpdate}>
-							Save
-						</button>
-						<button type="button" className="btn" onClick={toggleEdit}>
-							Cancel
-						</button>
+						<Button onClick={submitUpdate}>Save</Button>
+						<Button onClick={toggleEdit}>Cancel</Button>
 					</div>
-				</>
+				</form>
 			) : (
 				<>
 					<Checkbox.Root
@@ -73,12 +68,8 @@ export default function Task({
 
 					{item.isCompleted ? null : (
 						<div className="action-buttons">
-							<button onClick={toggleEdit} className="btn">
-								Edit
-							</button>
-							<button onClick={deleteTask} className="btn">
-								Delete
-							</button>
+							<Button onClick={toggleEdit}>Edit</Button>
+							<Button onClick={deleteTask}>Delete</Button>
 						</div>
 					)}
 				</>

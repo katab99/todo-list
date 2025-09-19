@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import TaskList from "./components/TaskList";
+import TaskList from "./pages/TaskList/TaskList";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import NewList from "./pages/NewList";
+import Home from "./pages/Home/Home";
+import NewList from "./pages/NewList/NewList";
 
 export default function App() {
 	return (

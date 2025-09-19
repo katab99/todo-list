@@ -1,0 +1,17 @@
+:root {
+	/* colors */
+	--bg-dark: hsl(0 0% 90%);
+	--bg: hsl(0 0% 95%);
+	--bg-light: hsl(0 0% 100%);
+	--text: hsl(0 0 5%);
+	--text-muted: hsl(0 0% 30%);
+	--accent: hsl(170 100% 37%);
+	--primary: hsl(9 99% 63%);
+	--secondary: hsl(211 89% 58%);
+	--margin-left: 1.5em;
+
+	/* spacing */
+	/* typography */
+	--font-family: Rubik, sans-serif;
+	/* borders */
+}
