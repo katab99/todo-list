@@ -1,4 +1,7 @@
 .textInput {
+	margin: 1em 0;
+	padding-bottom: 0.3em;
+	min-width: 90%;
 	border: none;
 	border-bottom: 1px solid #080705;
 	border-radius: 0;
@@ -9,8 +12,3 @@
 	border-bottom: 2px solid var(--accent);
 	transition: border-bottom 0.01s;
 }
-
-/* .add-item-input {
-	margin: 2.25em 3em 0 3em;
-	padding-bottom: 0.5em;
-} */

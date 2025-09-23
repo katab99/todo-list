@@ -78,12 +78,12 @@ export default function TaskList() {
 	};
 
 	return (
-		<main className="task-list-container">
-			<div className="task-list-header">
+		<main className="add-item-container">
+			<div className="add-item-header">
 				<h1>{currentList && currentList.name}</h1>
 			</div>
 
-			<form className="add-item-container">
+			<form className="add-item-form">
 				<TextInput
 					placeholder="e.g. clean up the kitchen"
 					value={newTask}
