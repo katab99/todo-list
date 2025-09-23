@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { clsx } from "clsx";
 import { Checkbox } from "radix-ui";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { TaskProps } from "../../types";
 import Button from "../Button/Button";
 import TextInput from "../TextInput/TextInput";
+import styles from "./Task.module.css";
 
 export default function Task({
 	item,
@@ -33,10 +33,19 @@ export default function Task({
 	};
 
 	return (
-		<div
-			key={item.id}
-			className={clsx("task-item-container", { taskItemEditing: isEditing })}
-		>
+		<div key={item.id} className={styles.taskContainer}>
+			<Checkbox.Root
+				className="CheckboxRoot"
+				id={item.id}
+				checked={item.isCompleted}
+				onCheckedChange={() => toggleCheck(item.id)}
+				disabled={isEditing}
+			>
+				<Checkbox.Indicator className="ChechboxIndicator">
+					<CheckIcon />
+				</Checkbox.Indicator>
+			</Checkbox.Root>
+
 			{isEditing ? (
 				<form>
 					<TextInput
@@ -46,33 +55,24 @@ export default function Task({
 						}
 						onKeyDown={updateKeyDown}
 					/>
-					<div className="action-buttons">
-						<Button onClick={submitUpdate}>Save</Button>
-						<Button onClick={toggleEdit}>Cancel</Button>
-					</div>
+
+					<Button type="submit" onClick={submitUpdate}>
+						Save
+					</Button>
+					<Button type="button" onClick={toggleEdit}>
+						Cancel
+					</Button>
 				</form>
 			) : (
-				<>
-					<Checkbox.Root
-						className="CheckboxRoot"
-						id={item.id}
-						checked={item.isCompleted}
-						onCheckedChange={() => toggleCheck(item.id)}
-					>
-						<Checkbox.Indicator className="ChechboxIndicator">
-							<CheckIcon />
-						</Checkbox.Indicator>
-					</Checkbox.Root>
-
-					<span>{item.task}</span>
+				<div>
+					<span className={styles.task} onDoubleClick={toggleEdit}>
+						{item.task}
+					</span>
 
 					{item.isCompleted ? null : (
-						<div className="action-buttons">
-							<Button onClick={toggleEdit}>Edit</Button>
-							<Button onClick={deleteTask}>Delete</Button>
-						</div>
+						<Button onClick={deleteTask}>Delete</Button>
 					)}
-				</>
+				</div>
 			)}
 		</div>
 	);

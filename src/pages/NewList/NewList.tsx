@@ -25,7 +25,7 @@ export default function NewList() {
 		setTaskLists((prevList) => [...prevList, newList]);
 		setListName("");
 	};
-	//add-item-container
+
 	return (
 		<main className="add-item-container">
 			<h1 className="add-item-header">New List</h1>

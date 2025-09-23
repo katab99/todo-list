@@ -1,7 +1,9 @@
 .textInput {
-	margin: 1em 0;
+	display: inline-block;
+	/* margin: 1em 0; */
 	padding-bottom: 0.3em;
-	min-width: 90%;
+	background: none;
+	/* min-width: 90%; */
 	border: none;
 	border-bottom: 1px solid #080705;
 	border-radius: 0;

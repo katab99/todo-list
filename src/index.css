@@ -97,24 +97,18 @@
 
 /* -- task-item */
 .task-item-container {
-	display: grid;
-	grid-template-columns: auto 1fr auto;
-	align-items: center;
-	gap: 1em;
 	padding: 0.75em 1em;
 	margin: 0 0.5em 1em 0.5em;
 	background: var(--bg);
-	border-radius: 8px;
-	box-shadow: 0px 4px 4px #00000030, 0px 12px 12px #00000015;
 }
 
 /* -- ELEMENTS -- */
 
 .CheckboxRoot {
+	margin: auto 0;
 	background: var(--bg-light);
 	color: var(--text);
-	border: none;
-	box-shadow: 0px 4px 4px #00000030, 0px 12px 12px #00000015;
+	border: 1px solid black;
 }
 
 .CheckboxRoot {
@@ -128,4 +122,9 @@
 .CheckboxRoot:hover {
 	box-shadow: 0 0 0 2px var(--bg-dark);
 	cursor: pointer;
+}
+
+.CheckboxRoot:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
 }
